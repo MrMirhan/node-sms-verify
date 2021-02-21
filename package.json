@@ -1,0 +1,14 @@
+{
+  "name": "node-sms-verify",
+  "version": "1.0.0",
+  "description": "SMS Verify Service for NodeJS with using sms-activate.ru API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Mirhan",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
