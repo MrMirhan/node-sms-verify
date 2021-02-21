@@ -1,6 +1,10 @@
 {
-  "name": "node-sms-verify",
-  "version": "1.0.0",
+  "name": "sms-verify",
+  "version": "1.1.1",
+  "versions": [
+    "1.1.0",
+    "1.1.1"
+  ],
   "description": "SMS Verify Service for NodeJS with using sms-activate.ru API",
   "main": "index.js",
   "scripts": {
@@ -10,5 +14,27 @@
   "license": "MIT",
   "dependencies": {
     "request": "^2.88.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrMirhan/node-sms-verify.git"
+  },
+  "keywords": [
+    "node sms verify",
+    "node sms verification",
+    "sms verify",
+    "sms verification",
+    "sms auth",
+    "node sms",
+    "sms"
+  ],
+  "bugs": {
+    "url": "https://github.com/MrMirhan/node-sms-verify/issues"
+  },
+  "homepage": "https://github.com/MrMirhan/node-sms-verify#readme",
+  "dist-tags": {
+    "latest": "1.1.1",
+    "beta": "1.1.1-beta.0"
+  },
+  "readmeFilename": "README.md"
 }
