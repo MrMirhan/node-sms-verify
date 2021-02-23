@@ -90,7 +90,7 @@ smsVerify.on('statusResponse', response => {
         console.log('Activation Code is:', code)
     } else if (response == "STATUS_CANCEL") {
         console.log('Activation Cancelled')
-    } else if (response == "STATUS_CANCEL") {
+    } else if (response == "STATUS_WAIT_RETRY") {
         console.log('Code Still Waiting.')
     }
 })
