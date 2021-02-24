@@ -1,9 +1,9 @@
 {
   "name": "sms-verify",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "versions": [
-    "1.2.0",
-    "1.1.1"
+    "1.2.1",
+    "1.2.0"
   ],
   "description": "SMS Verify Service for NodeJS with using sms-activate.ru API",
   "main": "index.js",
@@ -33,8 +33,8 @@
   },
   "homepage": "https://github.com/MrMirhan/node-sms-verify#readme",
   "dist-tags": {
-    "latest": "1.2.0",
-    "beta": "1.1.1-beta.0"
+    "latest": "1.2.1",
+    "beta": "1.2.1-beta.1"
   },
   "readmeFilename": "README.md"
 }
