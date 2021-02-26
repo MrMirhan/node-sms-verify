@@ -1,8 +1,8 @@
 {
   "name": "sms-verify",
-  "version": "1.2.1",
+  "version": "1.2.1-b",
   "versions": [
-    "1.2.1",
+    "1.2.1-b",
     "1.2.0"
   ],
   "description": "SMS Verify Service for NodeJS with using sms-activate.ru API",

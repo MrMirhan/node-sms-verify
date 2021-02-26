@@ -11,63 +11,55 @@ class SmsVerify extends EventEmitter {
     }
     
     myBalance(){
-        return new Promise(async (resolve, reject) => {
-            request({
-                url: this.url + this.apiKey + '&action=getBalance',
-                timeout: this.timeout
-            }, (error, response, body) => {
-                if(error) return console.error('error:', error);
-                if(!body.includes("ACCESS_BALANCE")) return this.emit('error', body);
-                const balance = body.replace("ACCESS_BALANCE:", "");
-                this.emit('balance', balance);
-            });
+        return request({
+            url: this.url + this.apiKey + '&action=getBalance',
+            timeout: this.timeout
+        }, (error, response, body) => {
+            if(error) return console.error('error:', error);
+            if(!body.includes("ACCESS_BALANCE")) return this.emit('error', body);
+            const balance = body.replace("ACCESS_BALANCE:", "");
+            this.emit('balance', balance);
         });
     }
 
     getCountryList(){
-        return new Promise(async (resolve, reject) => {
-            const list = require('./countryList.json');
-            this.emit('countryList', list)
-        });
+        const list = require('./countryList.json');
+        return this.emit('countryList', list)
     }
 
     getAvailiblePhones(countryCode){
-        return new Promise(async (resolve, reject) => {
-            request({
-                url: this.url + this.apiKey + '&action=getNumbersStatus&country=' + countryCode,
-                timeout: this.timeout
-            }, (error, response, body) => {
-                if(error) return console.error('error:', error);
-                body = JSON.parse(body)
-                let serviceList = [];
-                for(var Key in body) {
-                    serviceList.push({code: Key.split('_')[0], availible: body[`${Key}`]})
-                }
-                this.emit('availiblePhones', serviceList);
-            });
+        return request({
+            url: this.url + this.apiKey + '&action=getNumbersStatus&country=' + countryCode,
+            timeout: this.timeout
+        }, (error, response, body) => {
+            if(error) return console.error('error:', error);
+            body = JSON.parse(body)
+            let serviceList = [];
+            for(var Key in body) {
+                serviceList.push({code: Key.split('_')[0], availible: body[`${Key}`]})
+            }
+            this.emit('availiblePhones', serviceList);
         });
     }
 
     getAvailibleServices(countryCode){
-        return new Promise(async (resolve, reject) => {
-            request({
-                url: this.url + this.apiKey + '&action=getPrices&country=' + countryCode,
-                timeout: this.timeout
-            }, (error, response, body) => {
-                if(error) return console.error('error:', error);
-                body = JSON.parse(body)
-                body = body['54'];
-                let serviceList = [];
-                for(var Key in body) {
-                    serviceList.push({code: Key.split('_')[0], availible: body[`${Key}`].count, cost: body[`${Key}`].cost})
-                }
-                this.emit('availibleServices', serviceList);
-            });
+        return request({
+            url: this.url + this.apiKey + '&action=getPrices&country=' + countryCode,
+            timeout: this.timeout
+        }, (error, response, body) => {
+            if(error) return console.error('error:', error);
+            body = JSON.parse(body)
+            body = body['54'];
+            let serviceList = [];
+            for(var Key in body) {
+                serviceList.push({code: Key.split('_')[0], availible: body[`${Key}`].count, cost: body[`${Key}`].cost})
+            }
+            this.emit('availibleServices', serviceList);
         });
     }
 
     checkStatus(id, req){
-        request({
+        return request({
             url: this.url + this.apiKey + '&action=getStatus&id=' + id,
             timeout: this.timeout
         }, (error, response, body) => {
@@ -105,23 +97,21 @@ class SmsVerify extends EventEmitter {
     }
 
     orderNumber(service, country){
-        return new Promise(async (resolve, reject) => {
-            request({
-                url: this.url + this.apiKey + '&action=getNumber&service=' + service + '&country=' + country,
-                timeout: this.timeout
-            }, (error, response, body) => {
-                if(error) return console.error('error:', error);
-                if(!body.includes("ACCESS_NUMBER")) return this.emit('error', body);
-                body = body.replace("ACCESS_NUMBER:", "").split(':');
-                let id = body[0];
-                let number = body[1];
-                this.emit('numberOrder', {id: id, number: number});
-            });
+        return request({
+            url: this.url + this.apiKey + '&action=getNumber&service=' + service + '&country=' + country,
+            timeout: this.timeout
+        }, (error, response, body) => {
+            if(error) return console.error('error:', error);
+            if(!body.includes("ACCESS_NUMBER")) return this.emit('error', body);
+            body = body.replace("ACCESS_NUMBER:", "").split(':');
+            let id = body[0];
+            let number = body[1];
+            this.emit('numberOrder', {id: id, number: number});
         });
     }
 
     changeStatus(status, id){
-        request({
+        return request({
             url: this.url + this.apiKey + '&action=setStatus&status=' + status + '&id=' + id,
             timeout: this.timeout
         }, (error, response, body) => {
